@@ -1,33 +1,24 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
+// App.tsx
 import React from 'react';
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ThemeProvider } from './src/theme/ThemeProvider';
+import AppNavigator from './src/navigation';
+import { View, StyleSheet } from 'react-native';
+import MiniPlayer from './src/components/MiniPlayer';
 
-function App() {
-  const isDarkMode = false;
+export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Text style={styles.helloText}>Hello, World!</Text>
-    </View>
+    <ThemeProvider>
+      <SafeAreaProvider>
+        <View style={styles.app}>
+          <AppNavigator />
+          <MiniPlayer />
+        </View>
+      </SafeAreaProvider>
+    </ThemeProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  helloText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
+  app: { flex: 1 },
 });
-
-export default App;
