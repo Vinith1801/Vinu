@@ -1,5 +1,4 @@
-// src/theme/ThemeProvider.tsx
-import React, { createContext, useMemo, useState, ReactNode } from 'react';
+import React, { createContext, useMemo, useState, useEffect, ReactNode } from 'react';
 import { Appearance } from 'react-native';
 import { darkTheme, lightTheme, Theme } from './index';
 
@@ -16,8 +15,19 @@ export const ThemeContext = createContext<ThemeContextValue>({
 });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const colorScheme = Appearance.getColorScheme(); // 'light' | 'dark' | null
-  const [mode, setMode] = useState<'dark' | 'light'>(colorScheme === 'dark' ? 'dark' : 'light');
+  const [mode, setMode] = useState<'dark' | 'light'>(
+    Appearance.getColorScheme() === 'dark' ? 'dark' : 'light'
+  );
+
+  // 🔁 Listen for system theme changes
+  useEffect(() => {
+    const subscription = Appearance.addChangeListener(({ colorScheme }) => {
+      if (colorScheme) {
+        setMode(colorScheme === 'dark' ? 'dark' : 'light');
+      }
+    });
+    return () => subscription.remove();
+  }, []);
 
   const toggle = () => setMode((m) => (m === 'dark' ? 'light' : 'dark'));
 
