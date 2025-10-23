@@ -2,7 +2,7 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider } from './src/theme/ThemeProvider';
-import AppNavigator from './src/navigation';
+import AppNavigator from './src/navigation/AppNavigator';
 import { View, StyleSheet } from 'react-native';
 import MiniPlayer from './src/components/MiniPlayer';
 
