@@ -8,7 +8,7 @@ import { useTheme } from '../hooks/useTheme';
 type Track = {
   id: string;
   title: string;
-  artist?: string;
+  artist: string;
   duration?: string;
   path: string;
 };
