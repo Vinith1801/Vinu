@@ -59,7 +59,7 @@ export default function AppNavigator() {
     <NavigationContainer theme={navigationTheme}>
       <Tab.Navigator
         screenOptions={{
-          headerShown: true,
+          headerShown: false,
           tabBarShowLabel: false,
           tabBarStyle: [
             styles.tabBar,
